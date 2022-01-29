@@ -8,7 +8,7 @@ import scala.io.Source
 
 class ChargebackEmailExtractorTest extends SpecWithJUnit with ChargeBackDetailsMatcher {
 
-  "ChargebackEmailExtractor" should {
+  "ChargebackEmailExtractor::extractChargeBackDetails" should {
 
     "return extractChargeBackDetails for Air France" >> {
       //Data to be found in /resources/airFrance_Chargeback_Email.txt
@@ -34,5 +34,16 @@ class ChargebackEmailExtractorTest extends SpecWithJUnit with ChargeBackDetailsM
       val email = Source.fromResource("unknown_Chargeback_Email.txt").mkString
       ChargebackEmailExtractor.extractChargeBackDetails(email) must throwA[EmailParsingException]
     }
+  }
+
+  "ChargebackEmailExtractor::extractChargeBackDetails" should {
+
+    "return extractChargeBackDetails Json" >> {
+      //Data to be found in /resources/airFrance_Chargeback_Email.txt
+      val expectedJson = """{"ticketNumber":"12345678","reason":"Fraud","amount":100}"""
+      val email = Source.fromResource("airFrance_Chargeback_Email.txt").mkString
+      ChargebackEmailExtractor.extractChargeBackDetailsToJson(email) must beEqualTo(expectedJson)
+    }
+
   }
 }
