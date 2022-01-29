@@ -1,0 +1,8 @@
+Airline AF:
+
+Dear Hopper,
+
+We recently received a chargeback (tracking #M73DH82Z) from the bank regarding ticket number:
+Ticket Number: 12345678
+Amount: $100.00
+Reason: Fraud
